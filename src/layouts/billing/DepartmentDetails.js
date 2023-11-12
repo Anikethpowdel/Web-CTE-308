@@ -189,6 +189,108 @@
           <>
             {currentTab === 0 && (
               <>
+               <MDBox mt={5} mb={3}>
+            <h1 align="center">Aim</h1>
+            <p>{departmentAims[id]}</p>
+            <Grid container spacing={1} marginTop={5}>
+              <Grid item xs={12} md={6} xl={4}>
+                <StyledCard>
+                  <CardContent>
+                    {/* Icon */}
+                    <AccessTimeIcon sx={{ fontSize: 48, color: "white" }} />
+
+                    {/* Department Name */}
+                    <Typography variant="h6" color="white" gutterBottom>
+                      Award Title
+                    </Typography>
+
+                    {/* Established Date */}
+                    <Typography variant="body2" color="white">
+                    {departmentData.department[0].dname}
+                    </Typography>
+                  </CardContent>
+              </StyledCard>
+            </Grid>
+              <Grid item xs={12} xl={4}>
+                <StyledCard>
+                    <CardContent>
+                      {/* Icon */}
+                      <AccessTimeIcon sx={{ fontSize: 48, color: "white" }} />
+
+                      {/* Department Name */}
+                      <Typography variant="h6" color="white" gutterBottom>
+                      Programmes Offered
+                      </Typography>
+
+                      {/* Established Date */}
+                      <Typography variant="body2" color="white">
+                      {departmentData.department[0].nprogram}
+                      </Typography>
+                    </CardContent>
+                </StyledCard>
+              </Grid>
+              <Grid item xs={12} xl={4}>
+                <StyledCard>
+                    <CardContent>
+                      {/* Icon */}
+                      <AccessTimeIcon sx={{ fontSize: 48, color: "white" }} />
+
+                      {/* Department Name */}
+                      <Typography variant="h6" color="white" gutterBottom>
+                        Established Date
+                      </Typography>
+
+                      {/* Established Date */}
+                      <Typography variant="body2" color="white">
+                      {(departmentData.department[0].established_date).split("T")[0]}
+                      </Typography>
+                    </CardContent>
+                </StyledCard>
+              </Grid>
+            </Grid>
+          </MDBox>
+          <MDBox pt={2} px={2} lineHeight={1.25}>
+            <MDTypography variant="h6" fontWeight="medium">
+              Programmes
+            </MDTypography>
+            
+          </MDBox>
+          <MDBox p={2}>
+            <Grid container spacing={6}>
+              {[...Array(numberOfProjects)].map((_, index) => (
+                <Grid
+                  item
+                  key={index}
+                  xs={12}
+                  md={6}
+                  xl={12 / numberOfProjects}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                <DefaultProjectCard
+                  image={departmentData.Programme[index].imageurl}
+                  label={`project #${index + 1}`}
+                  title={departmentData.Programme[index].pname} 
+                  description={departmentData.Programme[index].description}
+                  action={{
+                    type: "internal",
+                    route: `/pages/profile/profile-overview/${index + 1}`,
+                    color: "info",
+                    label: "view project",
+                  }}
+                  authors={[
+                    { image: `team${index + 1}`, name: `Author ${index + 1}` },
+                    // Add more authors if needed
+                  ]}
+                  sx={{ textAlign: "center" }}
+                  // Adjust the width and height as needed
+                />
+                </Grid>
+              ))}
+            </Grid>
+           </MDBox>
              
               </>
             )}
