@@ -25,7 +25,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import cst from "assets/images/cst.jpeg"
 import backgroundImage from "assets/images/bg-profile.jpeg";
 
-function Header({ children }) {
+function Header({ children}) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -94,7 +94,7 @@ function Header({ children }) {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="Informaation"
+                  label="Information"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       home
@@ -121,7 +121,7 @@ function Header({ children }) {
             </AppBar>
           </Grid>
         </Grid>
-        {children}
+        {children(tabValue,setTabValue)}
       </Card>
     </MDBox>
   );
