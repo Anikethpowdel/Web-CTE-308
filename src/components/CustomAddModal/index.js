@@ -2,22 +2,17 @@ import React, { useState } from 'react';
 import MDButton from 'components/MDButton';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-const EditModal = ({ open, onClose }) => {
+const AddModal = ({ open, onClose, staffDetails }) => {
   const [focusedInput, setFocusedInput] = useState(null);
   const [formData, setFormData] = useState({
-    SID: '',
-    Name: '',
-    Designation: '',
-    Email: '',
-    ImageURL: '',
-    DepartmentNo: '',
+    StaffID: '',
+    StartingTenure: '',
+    EndingTenure: '',
   });
   const [validationErrors, setValidationErrors] = useState({
-    SID: '',
-    Name: '',
-    Email: '',
-    ImageURL: '',
+    StaffID: '',
     DepartmentNo: '',
     // Add more fields for validation errors if needed
   });
@@ -39,41 +34,6 @@ const EditModal = ({ open, onClose }) => {
       [fieldName]: '',
     }));
 
-  // Add your validation logic here
-  if (fieldName === 'SID' && !value.startsWith('RUB')) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'SID must start with "RUB"',
-    }));
-  }
-
-  if (fieldName === 'Name' && !isNaN(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Name cannot be a number',
-    }));
-  }
-
-  if (fieldName === 'Email' && !/^.+\.cst@rub\.edu\.bt$/.test(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Email must be in the format name.cst@rub.edu.bt',
-    }));
-  }
-  if (fieldName === 'ImageURL' && !isValidURL(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Invalid URL',
-    }));
-  }
-
-  if (fieldName === 'DepartmentNo' && !isValidDepartment(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Invalid Department ID. Allowed values are D01, D02, D03, D04, D05',
-    }));
-  }
-
 
     setFormData((prevData) => ({
       ...prevData,
@@ -81,38 +41,26 @@ const EditModal = ({ open, onClose }) => {
     }));
   };
 
-  const isValidURL = (str) => {
-    try {
-      new URL(str);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-
-  const isValidDepartment = (value) => {
-    const allowedDepartments = ['D01', 'D02', 'D03', 'D04', 'D05'];
-    return allowedDepartments.includes(value);
-  };
 
   const isSaveDisabled = Object.values(formData).some((value) => !value.trim());
+
+  const departmentNo = staffDetails[0].deptno;
 
   const handleSave = async () => {
     setLoading(true);
 
     const requestData = [
       {
-        sid: formData.SID,
-        name: formData.Name,
-        designation: formData.Designation,
-        email: formData.Email,
-        imageurl: formData.ImageURL,
-        deptno: formData.DepartmentNo,
+        deptid: departmentNo,
+        StaffID: formData.StaffID,
+        Starting_tenure : formData.StartingTenure,
+        endign_tenure : formData.EndingTenure
+
       }
     ];
 
     try {
-      const response = await fetch('https://node-api-6l0w.onrender.com/api/v1/students/department/addStaff', {
+      const response = await fetch('https://node-api-6l0w.onrender.com/api/v1/students/department/HOD', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -142,108 +90,95 @@ const EditModal = ({ open, onClose }) => {
     setErrorModalOpen(false);
   };
 
+
+  
+
+
+
+
   return (
     <div style={{ display: open ? 'block' : 'none', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)' }}>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', width: '600px', maxHeight: '80vh', overflowY: 'auto' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', width: '400px', maxHeight: '80vh', overflowY: 'auto' }}>
         <h2 align="Center">Add Staff Member</h2>
 
-        {/* SID */}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>SID:</label>
-          <input
-            type="text"
+       
+        
+         {/* Dropdown for StaffIDs */}
+        <FormControl style={{ marginBottom: '20px', width: '100%' }}>
+          <InputLabel id="staffIdLabel" style={{ height:"20px"}}>StaffID:</InputLabel>
+          <Select
+            labelId="staffIdLabel"
+            label="StaffID"
             style={{
-              ...inputStyle,
-              borderBottom: focusedInput === 'SID' ? '1px solid #4CAF50' : '1px solid #000',
-              borderColor: validationErrors.SID ? 'red' : '', // Set border color to red if there's a validation error
+              borderBottom: focusedInput === 'StaffID' ? '1px solid #4CAF50' : '1px solid #000',
+              fontSize: '20px',
             }}
-            onFocus={() => handleInputFocus('SID')}
+            onFocus={() => handleInputFocus('StaffID')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('SID', e.target.value)}
-          />
-          {/* Display validation error message */}
-          {validationErrors.SID && <p style={{ color: 'red', margin: 0 }}>{validationErrors.SID}</p>}
-        </div>
+            onChange={(e) => handleInputChange('StaffID', e.target.value)}
+          >
+            <MenuItem value="">Select StaffID</MenuItem>
+            {staffDetails &&
+              staffDetails.map((staff) => (
+                <MenuItem key={staff.sid} value={staff.sid}>
+                  {staff.sid}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
 
-        {/* Name */}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>Name:</label>
+        {/* Starting Tenure */}
+        <div style={{ marginBottom: '20px', width: '100%' }}>
+          <label htmlFor="startingTenure" style={{ marginBottom: '5px', display: 'block' }}>
+            Starting Tenure: 
+          </label>
           <input
-            type="text"
-            style={{
-              ...inputStyle,
-              borderBottom: focusedInput === 'Name' ? '1px solid #4CAF50' : '1px solid #000',
-            }}
-            onFocus={() => handleInputFocus('Name')}
+            id="startingTenure"
+            type="date"
+            value={formData.StartingTenure}
+            onFocus={() => handleInputFocus('StartingTenure')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('Name', e.target.value)}
-          />
-          {validationErrors.Name && <p style={{ color: 'red', margin: 0 }}>{validationErrors.Name}</p>}
-        </div>
-
-        {/* Designation */}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>Designation:</label>
-          <input
-            type="text"
-            style={{
-              ...inputStyle,
-              borderBottom: focusedInput === 'Designation' ? '1px solid #4CAF50' : '1px solid #000',
-            }}
-            onFocus={() => handleInputFocus('Designation')}
-            onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('Designation', e.target.value)}
+            onChange={(e) => handleInputChange('StartingTenure', e.target.value)}
+            style={{ height: '50px', width: '100%', padding: '10px', fontSize: '16px' }}
           />
         </div>
 
-        {/* Email */}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>Email:</label>
+        {/* Ending Tenure */}
+        <div style={{ marginBottom: '20px', width: '100%' }}>
+          <label htmlFor="endingTenure" style={{ marginBottom: '5px', display: 'block' }}>
+            Ending Tenure: 
+          </label>
           <input
-            type="text"
-            style={{
-              ...inputStyle,
-              borderBottom: focusedInput === 'Email' ? '1px solid #4CAF50' : '1px solid #000',
-              borderColor: validationErrors.Email ? 'red' : '', // Set border color to red if there's a validation error
-            }}
-            onFocus={() => handleInputFocus('Email')}
+            id="endingTenure"
+            type="date"
+            value={formData.EndingTenure}
+            onFocus={() => handleInputFocus('EndingTenure')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('Email', e.target.value)}
+            onChange={(e) => handleInputChange('EndingTenure', e.target.value)}
+            style={{ height: '50px', width: '100%', padding: '10px', fontSize: '16px' }}
           />
-          {/* Display validation error message */}
-          {validationErrors.Email && <p style={{ color: 'red', margin: 0 }}>{validationErrors.Email}</p>}
         </div>
 
-         {/* Image URL */}
-         <div style={inputGroupStyle}>
-          <label style={labelStyle}>Image URL:</label>
-          <input
-            type="text"
-            style={{
-              ...inputStyle,
-              borderBottom: focusedInput === 'ImageURL' ? '1px solid #4CAF50' : '1px solid #000',
-            }}
-            onFocus={() => handleInputFocus('ImageURL')}
-            onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('ImageURL', e.target.value)}
-          />
-          {validationErrors.ImageURL && <p style={{ color: 'red', margin: 0 }}>{validationErrors.ImageURL}</p>}
-        </div>
+        
         {/* Department*/}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>Department No:</label>
-          <input
-            type="text"
+        <FormControl style={{ marginBottom: '20px', width: '100%',  height : "10px"}}>
+          <InputLabel id="departmentNoLabel">Department No:</InputLabel>
+          <Select
+            labelId="departmentNoLabel"
+            label="Department No"
             style={{
-              ...inputStyle,
               borderBottom: focusedInput === 'DepartmentNo' ? '1px solid #4CAF50' : '1px solid #000',
+              fontSize: '20px',
             }}
+            value={departmentNo}
             onFocus={() => handleInputFocus('DepartmentNo')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('DepartmentNo', e.target.value)}
-          />
-          {validationErrors.DepartmentNo && <p style={{ color: 'red', margin: 0 }}>{validationErrors.DepartmentNo}</p>}
-        </div>
+            disabled // Make it read-only
+          >
+            <MenuItem value={departmentNo}>{departmentNo}</MenuItem>
+          </Select>
+        </FormControl>
+
         
         {/* ... (your existing input fields) */}
 
@@ -326,11 +261,11 @@ const inputStyle = {
   borderBottom: '1px solid #000', // Bottom border around the textbox
   outline: 'none',
   width: '100%',
-  padding: '5px',
+  padding: '10px',
   marginBottom: '5px',
   transition: 'border-bottom 0.3s',
   fontSize: '20px',
 };
 // ... (your existing styles)
 
-export default EditModal;
+export default AddModal;

@@ -19,6 +19,7 @@
   import DeleteButton from 'components/CustomDeleteButton'
   import DeleteConfirmationModal from 'components/DeleteModal'
   import EditModal from "components/CustomEditModal"
+  import AddModal from "components/CustomAddModal"
 
   // Material Dashboard 2 React example components
   import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -63,6 +64,8 @@
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
     const [staffToDelete, setStaffToDelete] = useState(null);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
+    const [hodData, setHodData] = useState(null);
+    const [isAddModalOpen, setAddModalOpen] = useState(false);
 
     const handleEditClick = () => {
       setEditModalOpen(true);
@@ -71,6 +74,13 @@
     const handleEditModalClose = () => {
       setEditModalOpen(false);
     };
+
+    const handleAddClick =() => {
+      setAddModalOpen(true);
+    };
+    const handleAddModalClose = () => {
+      setAddModalOpen(false);
+    }
   
 
   
@@ -86,7 +96,7 @@
       // Use the converted "id" to construct the API endpoint
       const endpoint = `https://node-api-6l0w.onrender.com/api/v1/students/departmentdetails/${convertIdToEndpointFormat(id)}`;
       const staffEndPoints =`https://node-api-6l0w.onrender.com/api/v1/students/staff/department/${convertIdToEndpointFormat(id)}`;
-
+      const hodEndpoint = `https://node-api-6l0w.onrender.com/api/v1/students/department/fullHod/${convertIdToEndpointFormat(id)}`;
       // Make an API request to fetch department details based on the "id"
       fetch(endpoint)
         .then((response) => response.json())
@@ -104,9 +114,22 @@
           })
           .catch((error)=>{
             console.log("Error fetching StaffData", error);
+          });
+        fetch(hodEndpoint)
+          .then((response) => response.json())
+          .then((data) => {
+            setHodData(data);
           })
+          .catch((error) => {
+            console.error("Error fetching HOD data:", error);
+          });
   
     }, [id]); // This will re-run the effect when "id" changes
+
+    const formatDate = (dateString) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    };
 
     
     if (!departmentData) {
@@ -165,6 +188,9 @@
     };
     const handleEditConfirm = ()=>{
       console.log('Handle confirm opened');
+    }
+    const handleAddConfirm = () =>{
+      console.log("Handle Add confirm opened");
     }
 
     const departmentAims = {
@@ -328,17 +354,63 @@
                 </MDBox>
               </>
             )}
-             <EditModal
-              open={isEditModalOpen}
-              onClose={handleEditModalClose}
-              onConfirm={handleEditConfirm}
-            />
+             
+        {currentTab === 2 && (
+          <>
+            <MDBox mt={5} mb={3}>
+            <MDButton color="primary" onClick={handleAddClick} style={{ marginBottom: 30 }}>
+                    Add
+                  </MDButton>
+              <Grid container spacing={3}>
+                {hodData.map((hod) => (
+                  <Grid item key={hod.staffid} xs={12} md={6} xl={4}>
+                    <StyledCard >
+                      <MDAvatar src={hod.imageurl} alt={hod.name} size="xl" shadow="sm" />
+                      <MDBox mt={4} />
+                      <MDTypography variant="h6">{hod.name}</MDTypography>
+                      <MDTypography variant="subtitle2" color="textSecondary">
+                        {hod.designation}
+                      </MDTypography>
+                      <MDTypography variant="body2" color="textSecondary">
+                        {hod.email}
+                      </MDTypography>
+                      <MDBox mt={2} />
+                      <Typography variant="body2" color="textSecondary">
+                        Starting Tenure: {formatDate(hod.starting_tenure)}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        Ending Tenure: {formatDate(hod.ending_tenure)}
+                      </Typography>
+                      <DeleteButton
+                            onClick={() => handleDeleteClick(hod)}
+                          >
+                            Delete
+                          </DeleteButton>
+                    </StyledCard>
+                  </Grid>
+                ))}
+              </Grid>
+            </MDBox>
+          </>
+        )}
+
+              <EditModal
+                open={isEditModalOpen}
+                onClose={handleEditModalClose}
+                onConfirm={handleEditConfirm}
+              />
+              <AddModal
+                open ={isAddModalOpen}
+                onClose={handleAddModalClose}
+                onConfrim={handleAddConfirm}
+                staffDetails={staffData} 
+               />
           <DeleteConfirmationModal
                   open={isDeleteModalOpen}
                   onClose={handleModalClose}
                   onConfirm={handleDeleteConfirm}
                 />
-        </>
+                </>
         )}
       </Header>
         <Footer />
