@@ -14,46 +14,110 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
+import Typography from "@mui/material/Typography";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
+
+import BusinessIcon from '@mui/icons-material/Business';
+import UpdateIcon from '@mui/icons-material/Update';
+
+import SchoolIcon from '@mui/icons-material/School';
 import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
+import exampleImage2 from "assets/images/DSC03931.JPG";
+import exampleImage3 from "assets/images/DSC03938.JPG";
+import exampleImage4 from "assets/images/DSC03941.JPG";
+import exampleImage5 from "assets/images/DSC04026.JPG";
+import exampleImage from "assets/images/rectangle-2.png";
 import MDBox from "components/MDBox";
-
 // Material Dashboard 2 React example components
+import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
+import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
+import Footer from "examples/Footer";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
-import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
-import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
-
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 
 // Dashboard components
-import Projects from "layouts/dashboard/components/Projects";
-import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
-function Dashboard() {
+function Dashboard({ doughnutChartData }) {
   const { sales, tasks } = reportsLineChartData;
-
+  const imageList = [
+    { src: exampleImage, alt: "Image 1" },
+    {src: exampleImage2, alt:"Image 2"},
+    {src: exampleImage3, alt:"Image 3"},
+   
+    {src: exampleImage4, alt:"Image 4"}, {src: exampleImage5, alt:"Image 5"},
+    // Add more images as needed
+  ];
+  const slickSettings = {
+    dots: true,
+    infinite: true,
+    speed: 2000, // Slide every 1 second
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000, // 5 seconds between slides
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <Grid container justifyContent="center" alignItems="center">
+        <Grid item xs={20} md={12} lg={8}>
+          <MDBox mb={1.5}>
+          <Slider {...slickSettings}>
+  {imageList.map((image, index) => (
+    <MDBox
+      key={index}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      textAlign="center"
+      p={3}
+      borderRadius="8px"
+      boxShadow="0px 4px 16px rgba(0, 0, 0, 0.1)"
+    >
+      {/* Image */}
+      <img
+        src={image.src}
+        alt={image.alt}
+        style={{
+          width: "100%",
+          maxWidth: "1200px", // Adjust this value as needed
+          borderRadius: "8px",
+        }}
+      />
+
+      {/* Text */}
+      <Typography variant="body2" color="textSecondary" mt={2}>
+        College of Science and Technology
+      </Typography>
+    </MDBox>
+  ))}
+</Slider>
+          </MDBox>
+        </Grid>
+      </Grid>
+
       <MDBox py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
-                icon="weekend"
-                title="Bookings"
-                count={281}
+                icon={<BusinessIcon />}  
+                title="Department"
+                count={6}
                 percentage={{
                   color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
+                  amount: "+ 0",
+                  label: "new department",
                 }}
               />
             </MDBox>
@@ -61,42 +125,42 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                icon={<SchoolIcon />} 
+                title="Programme"
+                count="10"
                 percentage={{
                   color: "success",
-                  amount: "+3%",
-                  label: "than last month",
+                  amount: "100%",
+                  label: "Job Secured Programme",
                 }}
               />
             </MDBox>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
-              <ComplexStatisticsCard
+            <ComplexStatisticsCard
                 color="success"
-                icon="store"
-                title="Revenue"
-                count="34k"
+                icon={<UpdateIcon />}  
+                title="New programme"
+                count="1"
                 percentage={{
                   color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
+                  amount: "+1",
+                  label: "Mechanical Engineering",
                 }}
               />
             </MDBox>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
-              <ComplexStatisticsCard
+            <ComplexStatisticsCard
                 color="primary"
-                icon="person_add"
-                title="Followers"
-                count="+91"
+                icon={<NotificationsIcon />} 
+                title="Notification"
+                count="+2"
                 percentage={{
                   color: "success",
-                  amount: "",
+                  amount: "1!",
                   label: "Just updated",
                 }}
               />
@@ -104,19 +168,23 @@ function Dashboard() {
           </Grid>
         </Grid>
         <MDBox mt={4.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
+      <Grid >
+     
+        <Grid  item xs={12} md={6} lg={4}>
+              <MDBox >
                 <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
+                  color="success"
+                  title="Students"
+                  description="Students Enrolled in particular Department"
+                  date="Updated 2 days ago"
                   chart={reportsBarChartData}
                 />
               </MDBox>
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
+        </Grid>
+       
+            
+            {/* <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="success"
@@ -130,28 +198,16 @@ function Dashboard() {
                   chart={sales}
                 />
               </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
+            </Grid> */}
         </MDBox>
         <MDBox>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={8}>
+            {/* <Grid item xs={12} md={6} lg={8}>
               <Projects />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <OrdersOverview />
-            </Grid>
+            </Grid> */}
           </Grid>
         </MDBox>
       </MDBox>
