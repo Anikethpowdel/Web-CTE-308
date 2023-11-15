@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React examples
+import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
+import Footer from "examples/Footer";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
 function Billing() {
   return (

@@ -13,39 +13,35 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-github-btn
-import GitHubButton from "react-github-btn";
 
 // @mui material components
 import Divider from "@mui/material/Divider";
-import Switch from "@mui/material/Switch";
-import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
+import IconButton from "@mui/material/IconButton";
+import Switch from "@mui/material/Switch";
 
 // @mui icons
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
+import MDTypography from "components/MDTypography";
 
 // Custom styles for the Configurator
 import ConfiguratorRoot from "examples/Configurator/ConfiguratorRoot";
 
 // Material Dashboard 2 React context
 import {
-  useMaterialUIController,
+  setDarkMode,
+  setFixedNavbar,
   setOpenConfigurator,
+  setSidenavColor,
   setTransparentSidenav,
   setWhiteSidenav,
-  setFixedNavbar,
-  setSidenavColor,
-  setDarkMode,
+  useMaterialUIController,
 } from "context";
 
 function Configurator() {
@@ -137,12 +133,12 @@ function Configurator() {
         pb={0.5}
         px={3}
       >
-        <MDBox>
+        {/* <MDBox>
           <MDTypography variant="h5">Material UI Configurator</MDTypography>
           <MDTypography variant="body2" color="text">
             See our dashboard options.
           </MDTypography>
-        </MDBox>
+        </MDBox> */}
 
         <Icon
           sx={({ typography: { size }, palette: { dark, white } }) => ({
@@ -285,7 +281,7 @@ function Configurator() {
           <Switch checked={darkMode} onChange={handleDarkMode} />
         </MDBox>
         <Divider />
-        <MDBox mt={3} mb={2}>
+        {/* <MDBox mt={3} mb={2}>
           <MDButton
             component={Link}
             href="https://www.creative-tim.com/learning-lab/react/quick-start/material-dashboard/"
@@ -338,7 +334,7 @@ function Configurator() {
               &nbsp; Share
             </MDButton>
           </MDBox>
-        </MDBox>
+        </MDBox> */}
       </MDBox>
     </ConfiguratorRoot>
   );
