@@ -22,6 +22,8 @@ import EditModal from "components/CustomEditModal"
 import AddModal from "components/CustomeAddPLModal"
 import DeleteModalHod from "components/CustomeDeleteModalHod";
 import ModuleTable from "components/CustomModuelTable";
+import ModuleModal from "components/CustomAddModuel"
+import ElectivesTable from "components/CustomElectiveTable";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -69,6 +71,8 @@ function ProgrammeDetails() {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [hodData, setHodData] = useState(null);
   const [isAddModalOpen, setAddModalOpen] = useState(false);
+  const [isModuleModalOpen, setModuleModalOpen] = useState(false);
+
 
   const handleEditClick = () => {
     setEditModalOpen(true);
@@ -77,6 +81,13 @@ function ProgrammeDetails() {
   const handleEditModalClose = () => {
     setEditModalOpen(false);
   };
+
+  const handleModuleAddClick = () =>{
+    setModuleModalOpen(true);
+  }
+  const handleModuleModalClose = () =>{
+    setModuleModalOpen(false);
+  }
 
   const handleAddClick =() => {
     setAddModalOpen(true);
@@ -210,6 +221,10 @@ function ProgrammeDetails() {
   const handleEditConfirm = ()=>{
     console.log('Handle confirm opened');
   }
+
+  const handleModuleConfirm =() =>{
+    console.log("Handle Confrim opened Module");
+  }
   const handleAddConfirm = () =>{
     console.log("Handle Add confirm opened");
   }
@@ -324,12 +339,15 @@ function ProgrammeDetails() {
           )}
           {currentTab === 1 && (
             <>
+            <MDButton color="primary" onClick={handleModuleAddClick} style={{ marginBottom: 30 }}>
+                  Add
+                </MDButton>
               <ModuleTable/>
             </>
           )}
           {currentTab ==2 && (
             <>
-            Hello world
+            <ElectivesTable />
             </>
           )}
            
@@ -376,6 +394,11 @@ function ProgrammeDetails() {
               open={isEditModalOpen}
               onClose={handleEditModalClose}
               onConfirm={handleEditConfirm}
+            />
+            <ModuleModal
+              open={isModuleModalOpen}
+              onClose={handleModuleModalClose}
+              onConfirm={handleModuleConfirm}
             />
             <AddModal
               open ={isAddModalOpen}

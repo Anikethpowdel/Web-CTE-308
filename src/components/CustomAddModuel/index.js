@@ -6,19 +6,24 @@ import CircularProgress from '@mui/material/CircularProgress';
 const EditModal = ({ open, onClose }) => {
   const [focusedInput, setFocusedInput] = useState(null);
   const [formData, setFormData] = useState({
-    SID: '',
-    Name: '',
-    Designation: '',
-    Email: '',
-    ImageURL: '',
-    DepartmentNo: '',
+    // Add your required fields here
+    ModuleCode: '',
+    ModuleName: '',
+    LectureHour: '',
+    TutorialHour: '',
+    PracticalHour: '',
+    ModuleCredit: '',
+    TheoryCAMarks: '',
+    TheoryExamMarks: '',
+    PracticalCAMarks: '',
+    SemesterNumber: '',
+    ModuleOwner: '',
+    ModuleCoordinator: '',
+    PID: '',
+    BorrowedModule: '',
   });
   const [validationErrors, setValidationErrors] = useState({
-    SID: '',
-    Name: '',
-    Email: '',
-    ImageURL: '',
-    DepartmentNo: '',
+
     // Add more fields for validation errors if needed
   });
   const [loading, setLoading] = useState(false);
@@ -39,41 +44,34 @@ const EditModal = ({ open, onClose }) => {
       [fieldName]: '',
     }));
 
+    let error = '';
+
+  switch (fieldName) {
+    case 'ModuleName':
+      // Check if ModuleName contains any numbers
+      if (/\d/.test(value)) {
+        error = 'Module Name cannot contain numbers';
+      }
+      break;
+    case 'TutorialHour':
+    case 'PracticalHour':
+    case 'LectureHour':
+      // Check if TutorialHour, PracticalHour, LectureHour is a number and not greater than 99
+      if (isNaN(value) || parseInt(value) > 99) {
+        error = 'Invalid input. Must be a number and less than 100';
+      }
+      break;
+    case 'ModuleCredit':
+      // Check if ModuleCredit is a number
+      if (isNaN(value)) {
+        error = 'Module Credit must be a number';
+      }
+      break;
+    // Add similar cases for other fields with specific validations
+    default:
+      break;
+  }
   // Add your validation logic here
-  if (fieldName === 'SID' && !value.startsWith('RUB')) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'SID must start with "RUB"',
-    }));
-  }
-
-  if (fieldName === 'Name' && !isNaN(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Name cannot be a number',
-    }));
-  }
-
-  if (fieldName === 'Email' && !/^.+\.cst@rub\.edu\.bt$/.test(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Email must be in the format name.cst@rub.edu.bt',
-    }));
-  }
-  if (fieldName === 'ImageURL' && !isValidURL(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Invalid URL',
-    }));
-  }
-
-  if (fieldName === 'DepartmentNo' && !isValidDepartment(value)) {
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: 'Invalid Department ID. Allowed values are D01, D02, D03, D04, D05',
-    }));
-  }
-
 
     setFormData((prevData) => ({
       ...prevData,
@@ -81,38 +79,35 @@ const EditModal = ({ open, onClose }) => {
     }));
   };
 
-  const isValidURL = (str) => {
-    try {
-      new URL(str);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
 
-  const isValidDepartment = (value) => {
-    const allowedDepartments = ['D01', 'D02', 'D03', 'D04', 'D05'];
-    return allowedDepartments.includes(value);
-  };
 
   const isSaveDisabled = Object.values(formData).some((value) => !value.trim());
 
   const handleSave = async () => {
     setLoading(true);
+    console.log(formData);
 
     const requestData = [
       {
-        sid: formData.SID,
-        name: formData.Name,
-        designation: formData.Designation,
-        email: formData.Email,
-        imageurl: formData.ImageURL,
-        deptno: formData.DepartmentNo,
+        mid: formData.ModuleCode,
+        mname: formData.ModuleName,
+        module_credit: formData.ModuleCredit,
+        lecture_hour: formData.LectureHour,
+        practical_hour: formData.PracticalHour,
+        theory_ca_marks: formData.TheoryCAMarks,
+        theory_exam_marks: formData.TheoryExamMarks,
+        practical_ca_marks: formData.PracticalCAMarks,
+        semno: formData.SemesterNumber,
+        module_owner: formData.ModuleOwner,
+        module_coordinator: formData.ModuleCoordinator,
+        pid: formData.PID,
+        borrowed_module: formData.BorrowedModule
       }
     ];
+    console.log(requestData);
 
     try {
-      const response = await fetch('https://node-api-6l0w.onrender.com/api/v1/students/department/addStaff', {
+      const response = await fetch('https://node-api-6l0w.onrender.com/api/v1/students/programme/addModule', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -145,104 +140,237 @@ const EditModal = ({ open, onClose }) => {
   return (
     <div style={{ display: open ? 'block' : 'none', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)' }}>
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', width: '600px', maxHeight: '80vh', overflowY: 'auto' }}>
-        <h2 align="Center">Add Staff Member</h2>
+        <h2 align="Center">Add Module</h2>
 
-        {/* SID */}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>SID:</label>
+      {/* Module Code */}
+      <div style={inputGroupStyle}>
+          <label style={labelStyle}>Module Code:</label>
           <input
             type="text"
             style={{
               ...inputStyle,
-              borderBottom: focusedInput === 'SID' ? '1px solid #4CAF50' : '1px solid #000',
-              borderColor: validationErrors.SID ? 'red' : '', // Set border color to red if there's a validation error
+              borderBottom: focusedInput === 'ModuleCode' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.ModuleCode ? 'red' : '',
             }}
-            onFocus={() => handleInputFocus('SID')}
+            onFocus={() => handleInputFocus('ModuleCode')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('SID', e.target.value)}
+            onChange={(e) => handleInputChange('ModuleCode', e.target.value)}
+            value={formData.ModuleCode} 
           />
-          {/* Display validation error message */}
-          {validationErrors.SID && <p style={{ color: 'red', margin: 0 }}>{validationErrors.SID}</p>}
+
         </div>
 
-        {/* Name */}
+        {/* Module Name */}
         <div style={inputGroupStyle}>
-          <label style={labelStyle}>Name:</label>
+          <label style={labelStyle}>Module Name:</label>
           <input
             type="text"
             style={{
               ...inputStyle,
-              borderBottom: focusedInput === 'Name' ? '1px solid #4CAF50' : '1px solid #000',
+              borderBottom: focusedInput === 'ModuleName' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.ModuleName ? 'red' : '',
             }}
-            onFocus={() => handleInputFocus('Name')}
+            onFocus={() => handleInputFocus('ModuleName')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('Name', e.target.value)}
+            onChange={(e) => handleInputChange('ModuleName', e.target.value)}
+            value={formData.ModuleName} 
           />
-          {validationErrors.Name && <p style={{ color: 'red', margin: 0 }}>{validationErrors.Name}</p>}
+          {validationErrors.ModuleName && <span style={{ color: 'red' }}>{validationErrors.ModuleName}</span>}
         </div>
 
-        {/* Designation */}
+        {/* Lecture Hour */}
         <div style={inputGroupStyle}>
-          <label style={labelStyle}>Designation:</label>
+          <label style={labelStyle}>Lecture Hour:</label>
           <input
             type="text"
             style={{
               ...inputStyle,
-              borderBottom: focusedInput === 'Designation' ? '1px solid #4CAF50' : '1px solid #000',
+              borderBottom: focusedInput === 'LectureHour' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.LectureHour ? 'red' : '',
             }}
-            onFocus={() => handleInputFocus('Designation')}
+            onFocus={() => handleInputFocus('LectureHour')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('Designation', e.target.value)}
+            onChange={(e) => handleInputChange('LectureHour', e.target.value)}
+            value={formData.LectureHour} 
           />
         </div>
-
-        {/* Email */}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>Email:</label>
-          <input
-            type="text"
-            style={{
-              ...inputStyle,
-              borderBottom: focusedInput === 'Email' ? '1px solid #4CAF50' : '1px solid #000',
-              borderColor: validationErrors.Email ? 'red' : '', // Set border color to red if there's a validation error
-            }}
-            onFocus={() => handleInputFocus('Email')}
-            onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('Email', e.target.value)}
-          />
-          {/* Display validation error message */}
-          {validationErrors.Email && <p style={{ color: 'red', margin: 0 }}>{validationErrors.Email}</p>}
-        </div>
-
-         {/* Image URL */}
+         {/* Tutorail Hour */}
          <div style={inputGroupStyle}>
-          <label style={labelStyle}>Image URL:</label>
+          <label style={labelStyle}>Tutorail Hour:</label>
           <input
             type="text"
             style={{
               ...inputStyle,
-              borderBottom: focusedInput === 'ImageURL' ? '1px solid #4CAF50' : '1px solid #000',
+              borderBottom: focusedInput === 'TutorialHour' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.TutorialHour ? 'red' : '',
             }}
-            onFocus={() => handleInputFocus('ImageURL')}
+            onFocus={() => handleInputFocus('TutorialHour')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('ImageURL', e.target.value)}
+            onChange={(e) => handleInputChange('TutorialHour', e.target.value)}
+            value={formData.TutorialHour} 
           />
-          {validationErrors.ImageURL && <p style={{ color: 'red', margin: 0 }}>{validationErrors.ImageURL}</p>}
         </div>
-        {/* Department*/}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>Department No:</label>
+        
+         {/* Practical Hour */}
+         <div style={inputGroupStyle}>
+          <label style={labelStyle}>Practical Hour:</label>
           <input
             type="text"
             style={{
               ...inputStyle,
-              borderBottom: focusedInput === 'DepartmentNo' ? '1px solid #4CAF50' : '1px solid #000',
+              borderBottom: focusedInput === 'PracticalHour' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.PracticalHour ? 'red' : '',
             }}
-            onFocus={() => handleInputFocus('DepartmentNo')}
+            onFocus={() => handleInputFocus('PracticalHour')}
             onBlur={handleInputBlur}
-            onChange={(e) => handleInputChange('DepartmentNo', e.target.value)}
+            onChange={(e) => handleInputChange('PracticalHour', e.target.value)}
+            value={formData.PracticalHour} 
           />
-          {validationErrors.DepartmentNo && <p style={{ color: 'red', margin: 0 }}>{validationErrors.DepartmentNo}</p>}
+        </div>
+         {/* Module Credit */}
+         <div style={inputGroupStyle}>
+          <label style={labelStyle}>Module Credit:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'ModuleCredit' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.ModuleCredit ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('ModuleCredit')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('ModuleCredit', e.target.value)}
+            value={formData.ModuleCredit} 
+          />
+        </div>
+        {/* Theory CA Marks */}
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>Theory CA Marks:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'TheoryCAMarks' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.TheoryCAMarks ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('TheoryCAMarks')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('TheoryCAMarks', e.target.value)}
+            value={formData.TheoryCAMarks} 
+          />
+        </div>
+        {/* TheoryExamMarks*/}
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>Theory Exam Marks:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'TheoryExamMarks' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.TheoryExamMarks ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('TheoryExamMarks')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('TheoryExamMarks', e.target.value)}
+            value={formData.TheoryExamMarks} 
+          />
+        </div>
+
+        {/* PracticalCAMarks*/}
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>Practical CA Marks:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'PracticalCAMarks' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.PracticalCAMarks ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('PracticalCAMarks')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('PracticalCAMarks', e.target.value)}
+            value={formData.PracticalCAMarks} 
+          />
+        </div>
+        {/* SemesterNumber*/}
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>Semester Number:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'SemesterNumber' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.SemesterNumber ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('SemesterNumber')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('SemesterNumber', e.target.value)}
+            value={formData.SemesterNumber} 
+          />
+        </div>
+        {/* ModuleOwner*/}
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>Module Owner:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'ModuleOwner' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.ModuleOwner ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('ModuleOwner')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('ModuleOwner', e.target.value)}
+            value={formData.ModuleOwner} 
+          />
+        </div>
+
+         {/* Module Coordinator*/}
+         <div style={inputGroupStyle}>
+          <label style={labelStyle}>Module Coordinator:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'ModuleCoordinator' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.ModuleCoordinator ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('ModuleCoordinator')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('ModuleCoordinator', e.target.value)}
+            value={formData.ModuleCoordinator} 
+          />
+        </div>
+        {/* BorrowedModule*/}
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>Borrowed Module:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'BorrowedModule' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.BorrowedModule ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('BorrowedModule')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('BorrowedModule', e.target.value)}
+            value={formData.BorrowedModule} 
+          />
+        </div>
+        <div style={inputGroupStyle}>
+          <label style={labelStyle}>PID:</label>
+          <input
+            type="text"
+            style={{
+              ...inputStyle,
+              borderBottom: focusedInput === 'PID' ? '1px solid #4CAF50' : '1px solid #000',
+              borderColor: validationErrors.PID ? 'red' : '',
+            }}
+            onFocus={() => handleInputFocus('PID')}
+            onBlur={handleInputBlur}
+            onChange={(e) => handleInputChange('PID', e.target.value)}
+            value={formData.PID} 
+          />
         </div>
         
         {/* ... (your existing input fields) */}
