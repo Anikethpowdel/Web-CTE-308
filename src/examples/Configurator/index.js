@@ -133,12 +133,12 @@ function Configurator() {
         pb={0.5}
         px={3}
       >
-        {/* <MDBox>
-          <MDTypography variant="h5">Material UI Configurator</MDTypography>
-          <MDTypography variant="body2" color="text">
+        <MDBox>
+          <MDTypography variant="h5">Programme Information Management System</MDTypography>
+          {/* <MDTypography variant="body2" color="text">
             See our dashboard options.
-          </MDTypography>
-        </MDBox> */}
+          </MDTypography> */}
+        </MDBox>
 
         <Icon
           sx={({ typography: { size }, palette: { dark, white } }) => ({

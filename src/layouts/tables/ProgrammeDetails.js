@@ -1,41 +1,36 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
-import Grid from "@mui/material/Grid";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import AccessTimeIcon from "@mui/icons-material/AccessTime"; 
-import Divider from "@mui/material/Divider";
 
 
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
-import MDButton from "components/MDButton";
-import DeleteButton from 'components/CustomDeleteButton'
-import DeleteConfirmationModal from 'components/DeleteModal'
-import EditModal from "components/CustomEditModal"
-import AddModal from "components/CustomeAddPLModal"
-import DeleteModalHod from "components/CustomeDeleteModalHod";
-import ModuleTable from "components/CustomModuelTable";
-import ModuleModal from "components/CustomAddModuel"
+import ModuleModal from "components/CustomAddModuel";
+import DeleteButton from 'components/CustomDeleteButton';
+import EditModal from "components/CustomEditModal";
 import ElectivesTable from "components/CustomElectiveTable";
+import ModuleTable from "components/CustomModuelTable";
+import AddModal from "components/CustomeAddPLModal";
+import DeleteModalHod from "components/CustomeDeleteModalHod";
+import MDAvatar from "components/MDAvatar";
+import MDBox from "components/MDBox";
+import MDButton from "components/MDButton";
+import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React example components
+import Footer from "examples/Footer";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
 
-import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 // Overview page components
 import Header from "layouts/tables/components/Header";
-import ProfilesList from "examples/Lists/ProfilesList";
-import IT from "assets/images/IT.jpeg"
 
 // Data
 import { styled } from "@mui/system";
@@ -43,7 +38,7 @@ import { styled } from "@mui/system";
 
 
 const StyledCard = styled(Card)({
-  backgroundColor: "gray",
+  backgroundColor: "E5E0D8",
   height: "200px",
   display: "flex",
   flexDirection: "column",
@@ -54,7 +49,7 @@ const StyledCard = styled(Card)({
   // Hover styles
   "&:hover": {
     transform: "translateY(-10px)", // Move the card up on hover
-    color: "orange", // Change font color on hover
+    color: "#483d8b", // Change font color on hover
   },
 });
 

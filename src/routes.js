@@ -3,7 +3,6 @@ import Billing from "layouts/billing";
 import DepartmentDetails from "layouts/billing/DepartmentDetails";
 import Dashboard from "layouts/dashboard";
 import Notifications from "layouts/notifications";
-import Profile from "layouts/profile";
 import Tables from "layouts/tables";
 import ProgrammeDetails from "layouts/tables/ProgrammeDetails";
 
@@ -43,17 +42,17 @@ const routes = [
     route: "/notifications",
     component: <Notifications />,
   },
+  // {
+  //   type: "collapse",
+  //   name: "Profile",
+  //   key: "profile",
+  //   icon: <Icon fontSize="small">person</Icon>,
+  //   route: "/profile",
+  //   component: <Profile />,
+  // },
   {
     type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
-  },
-  {
-    type: "collapse",
-    name: "Sign In",
+    name: "Log Out",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
