@@ -54,7 +54,7 @@ const ModuleTable = () => {
                 <th rowSpan="3">Module Name</th>
                 <th rowSpan="2" colSpan="3">Hours</th>
                 <th rowSpan="3">Credit</th>
-                <th colSpan="3">Marks</th>
+                <th colSpan="4">Marks</th>
                 <th rowSpan="3">Module Coordinator</th>
                 <th rowSpan="3">Borrowed Module</th>
                 <th rowSpan="3">Module Owner</th>
@@ -70,7 +70,7 @@ const ModuleTable = () => {
                 <td>Practical</td>
                 <td>Theory CA Marks</td>
                 <td>Theory Exam Marks</td>
-                <td>Practical CA Marks</td>
+                <td colSpan="2">Practical CA Marks</td>
               </tr>
             </thead>
             <tbody>
@@ -84,7 +84,7 @@ const ModuleTable = () => {
                   <td>{module.module_credit}</td>
                   <td>{module.theory_ca_marks}</td>
                   <td>{module.theory_exam_marks}</td>
-                  <td>{module.practical_ca_marks}</td>
+                  <td colSpan={2}>{module.practical_ca_marks}</td>
                   <td>{module.module_coordinator}</td>
                   <td>{module.borrowed_module}</td>
                   <td>{module.module_owner}</td>
