@@ -18,8 +18,8 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
+import Link from "@mui/material/Link";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -57,12 +57,12 @@ function Footer({ light }) {
               </Icon>
             </MDBox>
             by
-            <Link href="https://www.creative-tim.com/" target="_blank">
+            <Link href="https://cst.edu.bt/index.php/en/" target="_blank">
               <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
-                &nbsp;Creative Tim&nbsp;
+                &nbsp;Group 6&nbsp;
               </MDTypography>
             </Link>
-            for a better web.
+            Programme Information Management System
           </MDBox>
           <MDBox
             component="ul"
@@ -82,18 +82,18 @@ function Footer({ light }) {
             })}
           >
             <MDBox component="li" pr={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/" target="_blank">
+              <Link href="https://cst.edu.bt/index.php/en/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
-                  Creative Tim
+                  
                 </MDTypography>
               </Link>
             </MDBox>
             <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/presentation" target="_blank">
+              <Link href="https://cst.edu.bt/index.php/en/about-4" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
@@ -104,24 +104,24 @@ function Footer({ light }) {
               </Link>
             </MDBox>
             <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/blog" target="_blank">
+              <Link href="https://ims.rub.edu.bt/public/auth/view-login" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
-                  Blog
+                  RUB IMS
                 </MDTypography>
               </Link>
             </MDBox>
             <MDBox component="li" pl={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/license" target="_blank">
+              <Link href="https://vle.cst.edu.bt/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
-                  License
+                  VLE
                 </MDTypography>
               </Link>
             </MDBox>

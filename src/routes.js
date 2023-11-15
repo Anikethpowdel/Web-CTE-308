@@ -1,12 +1,10 @@
-import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
+import SignIn from "layouts/authentication/sign-in";
 import Billing from "layouts/billing";
-import RTL from "layouts/rtl";
+import DepartmentDetails from "layouts/billing/DepartmentDetails";
+import Dashboard from "layouts/dashboard";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
-import DepartmentDetails from "layouts/billing/DepartmentDetails";
+import Tables from "layouts/tables";
 import ProgrammeDetails from "layouts/tables/ProgrammeDetails";
 
 // @mui icons
@@ -37,15 +35,6 @@ const routes = [
     route: "/tables",
     component: <Tables />,
   },
-  
-  {
-    type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-    route: "/rtl",
-    component: <RTL />,
-  },
   {
     type: "collapse",
     name: "Notifications",
@@ -69,14 +58,6 @@ const routes = [
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
-  },
-  {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
   },
   {
     type: "route", // Use "route" for individual routes

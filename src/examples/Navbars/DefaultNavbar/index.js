@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -28,10 +28,8 @@ import Icon from "@mui/material/Icon";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
 
 // Material Dashboard 2 React example components
-import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
 
 // Material Dashboard 2 React base styles
@@ -110,10 +108,10 @@ function DefaultNavbar({ transparent, light, action }) {
           pl={{ xs: 0, lg: 1 }}
         >
           <MDTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Material Dashboard 2
+            Programme Information Management System
           </MDTypography>
         </MDBox>
-        <MDBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
+        {/* <MDBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
           <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
           <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
           <DefaultNavbarLink
@@ -156,8 +154,8 @@ function DefaultNavbar({ transparent, light, action }) {
               >
                 {action.label}
               </MDButton>
-            </MDBox>
-          ))}
+            </MDBox> 
+          ))}*/}
         <MDBox
           display={{ xs: "inline-block", lg: "none" }}
           lineHeight={0}

@@ -72,7 +72,7 @@ function Footer({ company, links }) {
             &nbsp;{name}&nbsp;
           </MDTypography>
         </Link>
-        for a better web.
+        Programe Information Management System
       </MDBox>
       <MDBox
         component="ul"
@@ -99,12 +99,12 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+  company: { href: "https://cst.edu.bt/index.php/en/", name: "Group 6" },
   links: [
-    { href: "https://www.creative-tim.com/", name: "Creative Tim" },
-    { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-    { href: "https://www.creative-tim.com/blog", name: "Blog" },
-    { href: "https://www.creative-tim.com/license", name: "License" },
+    { href: "https://cst.edu.bt/index.php/en/", name: "CST" },
+    { href: "https://cst.edu.bt/index.php/en/about-4", name: "About Us" },
+    { href: "https://ims.rub.edu.bt/public/auth/view-login", name: "RUB IMS" },
+    { href: "https://vle.cst.edu.bt/", name: "VLE" },
   ],
 };
 
