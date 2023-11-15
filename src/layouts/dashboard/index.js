@@ -63,12 +63,12 @@ function Dashboard({ doughnutChartData }) {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000, // 5 seconds between slides
+    autoplaySpeed: 2000, 
   };
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <Grid container justifyContent="center" alignItems="center">
+      
         <Grid item xs={20} md={12} lg={8}>
           <MDBox mb={1.5}>
           <Slider {...slickSettings}>
@@ -89,6 +89,7 @@ function Dashboard({ doughnutChartData }) {
         alt={image.alt}
         style={{
           width: "100%",
+          maxHeight:"350px",
           maxWidth: "1200px", // Adjust this value as needed
           borderRadius: "8px",
         }}
@@ -103,7 +104,7 @@ function Dashboard({ doughnutChartData }) {
 </Slider>
           </MDBox>
         </Grid>
-      </Grid>
+      
 
       <MDBox py={3}>
         <Grid container spacing={3}>
