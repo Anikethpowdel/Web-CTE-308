@@ -7,6 +7,7 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import DepartmentDetails from "layouts/billing/DepartmentDetails";
+import ProgrammeDetails from "layouts/tables/ProgrammeDetails";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -23,19 +24,20 @@ const routes = [
   {
     type: "collapse",
     name: "Departments",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
-  },
-  {
-    type: "collapse",
-    name: "Programmes",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/billing",
     component: <Billing />,
   },
+  {
+    type: "collapse",
+    name: "Programmes",
+    key: "tables",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/tables",
+    component: <Tables />,
+  },
+  
   {
     type: "collapse",
     name: "RTL",
@@ -82,6 +84,13 @@ const routes = [
     key: "department-details", // A unique key for the route
     route: "/department/:id", // The route path with a parameter ":id"
     component: <DepartmentDetails />, // The component to render
+  },
+  {
+    type: "route", // Use "route" for individual routes
+    name: "Programme Details", // The name for the route
+    key: "programme-details", // A unique key for the route
+    route: "/programme/:id", // The route path with a parameter ":id"
+    component: <ProgrammeDetails />, // The component to render
   },
 ];
 

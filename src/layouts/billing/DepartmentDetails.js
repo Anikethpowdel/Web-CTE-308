@@ -20,6 +20,7 @@
   import DeleteConfirmationModal from 'components/DeleteModal'
   import EditModal from "components/CustomEditModal"
   import AddModal from "components/CustomAddModal"
+  import DeleteModalHod from "components/CustomeDeleteModalHod";
 
   // Material Dashboard 2 React example components
   import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -39,7 +40,7 @@
 
 
   const StyledCard = styled(Card)({
-    backgroundColor: "gray",
+    backgroundColor: "#E5E0D8",
     height: "200px",
     display: "flex",
     flexDirection: "column",
@@ -50,7 +51,7 @@
     // Hover styles
     "&:hover": {
       transform: "translateY(-10px)", // Move the card up on hover
-      color: "orange", // Change font color on hover
+      color: "#483d8b", // Change font color on hover
     },
   });
 
@@ -62,6 +63,8 @@
     const [staffData, setStaffData] = useState(null);
     const [tabValue, setTabValue] = useState(0);
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [isDeleteHodModalOpen, setDeleteHodModalOpen] = useState(false);
+    const [hodToDelete, setHodTODelete] = useState(null);
     const [staffToDelete, setStaffToDelete] = useState(null);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
     const [hodData, setHodData] = useState(null);
@@ -166,10 +169,48 @@
     };
 
 
+    const deleteHodMember = async (staffId) => {
+      try {
+        const response = await fetch(
+          `https://node-api-6l0w.onrender.com/api/v1/students/department/removeHoD/${staffId}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.ok) {
+          setHodData((prevHoDData) =>
+            prevHoDData.filter((hod) => hod.staffid !== staffId)
+          );
+          console.log("HOD member deleted successfully");
+        } else {
+          console.error("Failed to delete HOD member");
+        }
+      } catch (error) {
+        console.error("Error deleting HOD member:", error);
+      }
+    };
+    
+
+
     const handleDeleteClick = (staff) => {
       setStaffToDelete(staff);
       setDeleteModalOpen(true);
     };
+
+    const handleHodDeleteClick = (hod) => {
+      setHodTODelete(hod);
+      setDeleteHodModalOpen(true);
+  
+    };
+
+    const handleMOdalHodClose = () =>{
+      console.log("cancel clicked");
+      setHodTODelete(null);
+      setDeleteHodModalOpen(false);
+    }
   
     // Function to close the modal
     const handleModalClose = () => {
@@ -186,12 +227,27 @@
         handleModalClose();
       }
     };
+    const handleHodDeleteConfirm = async () => {
+      console.log("ok this wokring, delte clicked");
+      if (hodToDelete) {
+        console.log(hodToDelete.staffid)
+        await deleteHodMember(hodToDelete.staffid);
+ // Ensure hodToDelete is populated correctly
+        handleMOdalHodClose();
+      }
+    };
+    
+
+
+
     const handleEditConfirm = ()=>{
       console.log('Handle confirm opened');
     }
     const handleAddConfirm = () =>{
       console.log("Handle Add confirm opened");
     }
+
+   
 
     const departmentAims = {
       1: "The Department of Civil Engineering aims to develop students with a thorough background in both theoretical and practical aspects of the core principles of Bachelor of Engineering in Civil Engineering, and of the underlying scientific fundamentals.",
@@ -237,7 +293,7 @@
                   </CardContent>
               </StyledCard>
             </Grid>
-              <Grid item xs={12} xl={4}>
+              <Grid item xs={12} md={6} xl={4}>
                 <StyledCard>
                     <CardContent>
                       {/* Icon */}
@@ -255,7 +311,7 @@
                     </CardContent>
                 </StyledCard>
               </Grid>
-              <Grid item xs={12} xl={4}>
+              <Grid item xs={12} md={6} xl={4}>
                 <StyledCard>
                     <CardContent>
                       {/* Icon */}
@@ -382,7 +438,7 @@
                         Ending Tenure: {formatDate(hod.ending_tenure)}
                       </Typography>
                       <DeleteButton
-                            onClick={() => handleDeleteClick(hod)}
+                            onClick={() => handleHodDeleteClick(hod)}
                           >
                             Delete
                           </DeleteButton>
@@ -405,11 +461,16 @@
                 onConfrim={handleAddConfirm}
                 staffDetails={staffData} 
                />
-          <DeleteConfirmationModal
+              <DeleteConfirmationModal
                   open={isDeleteModalOpen}
                   onClose={handleModalClose}
                   onConfirm={handleDeleteConfirm}
                 />
+              <DeleteModalHod
+              open ={isDeleteHodModalOpen}
+              onClose={handleMOdalHodClose}
+              onConfirm={handleHodDeleteConfirm}
+               />
                 </>
         )}
       </Header>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Typography, Box, CircularProgress, Button } from "@mui/material";
 import DeleteButton from 'components/CustomDeleteButton';
 
-const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
+const DeleteModal = ({ open, onClose, onConfirm }) => {
   const [isLoading, setLoading] = useState(false);
 
   const handleConfirmClick = async () => {
@@ -35,13 +35,14 @@ const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
         }}
       >
         <Typography variant="h6" gutterBottom>
-          Are you sure you want to delete this staff member?
+          Are you sure you want to delete this Head of Department?
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
           <DeleteButton onClick={onClose}>
             Cancel
           </DeleteButton>
-          <DeleteButton
+          <Button
+            variant="contained"
             onClick={handleConfirmClick}
             disabled={isLoading}
           >
@@ -50,11 +51,11 @@ const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
             ) : (
               "Delete"
             )}
-          </DeleteButton>
+          </Button>
         </Box>
       </Box>
     </Modal>
   );
 };
 
-export default DeleteConfirmationModal;
+export default DeleteModal;
