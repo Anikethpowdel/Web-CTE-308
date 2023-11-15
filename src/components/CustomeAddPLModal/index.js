@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-const AddModal = ({ open, onClose, staffDetails }) => {
+const AddModal = ({ open, onClose, staffDetails ,PID}) => {
   const [focusedInput, setFocusedInput] = useState(null);
   const [formData, setFormData] = useState({
     StaffID: '',
@@ -47,6 +47,8 @@ const AddModal = ({ open, onClose, staffDetails }) => {
   const isSaveDisabled = Object.values(formData).some((value) => !value.trim());
 
   const departmentNo = staffDetails[0].deptno;
+  console.log(PID);
+
 
   const handleSave = async () => {
     const newStaffId = formData.StaffID;
@@ -60,6 +62,7 @@ const AddModal = ({ open, onClose, staffDetails }) => {
     const requestData = [
       {
         deptid: departmentNo,
+        pid : PID,
         staffid: formData.StaffID,
         starting_tenure : formData.StartingTenure,
         ending_tenure : formData.EndingTenure,
@@ -69,7 +72,7 @@ const AddModal = ({ open, onClose, staffDetails }) => {
     console.log('Request Data:', requestData); 
 
     try {
-      const response = await fetch('https://node-api-6l0w.onrender.com/api/v1/students/department/HOD', {
+      const response = await fetch('https://node-api-6l0w.onrender.com/api/v1/students/programme/PL', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +111,7 @@ const AddModal = ({ open, onClose, staffDetails }) => {
   return (
     <div style={{ display: open ? 'block' : 'none', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)' }}>
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', width: '400px', maxHeight: '80vh', overflowY: 'auto' }}>
-        <h2 align="Center">Add Head of Department</h2>
+        <h2 align="Center">Add Programme Leader</h2>
 
        
         
@@ -169,6 +172,26 @@ const AddModal = ({ open, onClose, staffDetails }) => {
           />
         </div>
 
+         {/* Department*/}
+         <FormControl style={{ marginBottom: '40px', width: '100%',  height : "10px"}}>
+          <InputLabel id="departmentNoLabel">Programme No:</InputLabel>
+          <Select
+            labelId="programmeNoLabel"
+            label="Programme No"
+            style={{
+              borderBottom: focusedInput === 'ProgrammeNo' ? '1px solid #4CAF50' : '1px solid #000',
+              fontSize: '20px',
+            }}
+            value={PID}
+            onFocus={() => handleInputFocus('Programme')}
+            onBlur={handleInputBlur}
+            disabled // Make it read-only
+          >
+            <MenuItem value={PID}>{PID}</MenuItem>
+          </Select>
+        </FormControl>
+
+
         
         {/* Department*/}
         <FormControl style={{ marginBottom: '20px', width: '100%',  height : "10px"}}>
@@ -220,7 +243,7 @@ const AddModal = ({ open, onClose, staffDetails }) => {
         <div style={{ display: successModalOpen ? 'block' : 'none', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)' }}>
           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', width: '400px' }}>
             <h2 align="Center">Success</h2>
-            <p align="center">Staff member added successfully!</p>
+            <p align="center">Programme Leader added successfully!</p>
             <Box mt={2} display="flex" justifyContent="center">
               <MDButton
                 color="success"

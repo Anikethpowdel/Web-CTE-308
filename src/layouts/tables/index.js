@@ -1,104 +1,110 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import { Link } from 'react-router-dom';
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
 
-// Material Dashboard 2 React example components
+// Material Dashboard 2 React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
+import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
-// Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
-
-function Tables() {
-  const { columns, rows } = authorsTableData();
-  const { columns: pColumns, rows: pRows } = projectsTableData();
-
+function Programme() {
   return (
     <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Authors Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
+      <DashboardNavbar absolute isMini />
+      <MDBox mt={8}>
+        <MDBox mb={3} style={{ width: '1400px' }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={8}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6} xl={4}>
+                <Link to="/programme/1">
+                  <DefaultInfoCard
+                    icon="account_balance"
+                    title="Bachelor of Engineering in Civil Engineering"
+                    description="Description for programme 1"
+                    value="P01"
+                  />
+                </Link>
+                </Grid>
+                <Grid item xs={12} md={6} xl={4}>
+                  <Link to="/department/2" >
+                    <DefaultInfoCard
+                      icon="account_balance"
+                      title="Department of Electrical"
+                      description="Description for Department 2"
+                      value="D02"
+                    />
+                  </Link>
+                  
+                </Grid>
+                <Grid item xs={12} md={6} xl={4}>
+                  <Link to="/department/3" >
+                    <DefaultInfoCard
+                      icon="account_balance"
+                      title="Electronic and Communication"
+                      description="Description for Department 2"
+                      value="D03"
+                    />
+                  </Link> 
+                </Grid>
+                <Grid item xs={12} md={6} xl={4}>
+                  <Link to="/department/4" >
+                    <DefaultInfoCard
+                      icon="account_balance"
+                      title="Department of Information Technology"
+                      description="Description for Department 2"
+                      value="D04"
+                    />
+                  </Link>
+                  
+                </Grid>
+                <Grid item xs={12} md={6} xl={4}>
+                  <Link to="/department/6" >
+                    <DefaultInfoCard
+                      icon="account_balance"
+                      title="Department of Architecture"
+                      description="Description for Department 2"
+                      value="D05"
+                    />
+                  </Link>
+                  
+                </Grid>
+                <Grid item xs={12} md={6} xl={4}>
+                  <Link to="/department/5" >
+                    <DefaultInfoCard
+                      icon="account_balance"
+                      title="Department of Science and Humanities"
+                      description="Description for Department 2"
+                      value="D06"
+                    />
+                  </Link>
+                  
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} lg={4}>
+              {/* Remove the Invoices component */}
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Projects Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
+        </MDBox>
+        <MDBox mb={3}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={7}>
+              {/* Remove the BillingInformation component */}
+            </Grid>
+            <Grid item xs={12} md={5}>
+              {/* Remove the Transactions component */}
+            </Grid>
           </Grid>
-        </Grid>
+        </MDBox>
       </MDBox>
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default Tables;
+export default Programme;
