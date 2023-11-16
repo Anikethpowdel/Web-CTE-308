@@ -16,20 +16,19 @@ Coded by www.creative-tim.com
 import { useState } from "react";
 
 // @mui material components
-import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
 import MDAlert from "components/MDAlert";
-import MDButton from "components/MDButton";
+import MDBox from "components/MDBox";
 import MDSnackbar from "components/MDSnackbar";
+import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React example components
+import Footer from "examples/Footer";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
 
 function Notifications() {
   const [successSB, setSuccessSB] = useState(false);
@@ -48,11 +47,11 @@ function Notifications() {
 
   const alertContent = (name) => (
     <MDTypography variant="body2" color="white">
-      A simple {name} alert with{" "}
+      A New module CTE 404 is  added in 
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
-        an example link
+        Department of Civil Engineering
       </MDTypography>
-      . Give it a click if you like.
+      Mechanical Engineering
     </MDTypography>
   );
 
@@ -61,7 +60,7 @@ function Notifications() {
       color="success"
       icon="check"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content="Added new Department"
       dateTime="11 mins ago"
       open={successSB}
       onClose={closeSuccessSB}
@@ -74,7 +73,7 @@ function Notifications() {
     <MDSnackbar
       icon="notifications"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content="Added new Programme Under Department of Civil Engineering"
       dateTime="11 mins ago"
       open={infoSB}
       onClose={closeInfoSB}
@@ -87,7 +86,7 @@ function Notifications() {
       color="warning"
       icon="star"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content="Deleted programme from Department of Electrical Engineering"
       dateTime="11 mins ago"
       open={warningSB}
       onClose={closeWarningSB}
@@ -101,7 +100,7 @@ function Notifications() {
       color="error"
       icon="warning"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content="Added new Programme Mechanical Engineering"
       dateTime="11 mins ago"
       open={errorSB}
       onClose={closeErrorSB}
@@ -118,32 +117,68 @@ function Notifications() {
           <Grid item xs={12} lg={8}>
             <Card>
               <MDBox p={2}>
-                <MDTypography variant="h5">Alerts</MDTypography>
+                <MDTypography variant="h5">Notification</MDTypography>
               </MDBox>
               <MDBox pt={2} px={2}>
                 <MDAlert color="primary" dismissible>
                   {alertContent("primary")}
                 </MDAlert>
                 <MDAlert color="secondary" dismissible>
-                  {alertContent("secondary")}
+                <MDTypography variant="body2" color="white">
+      A Programme is Deleted in 
+      <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
+        Department of Electrical Engineering
+      </MDTypography>
+      Master in Renewal Engineering
+    </MDTypography>
                 </MDAlert>
                 <MDAlert color="success" dismissible>
-                  {alertContent("success")}
+                <MDTypography variant="body2" color="white">
+      A New Module Test101 is  added 
+      <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
+        Department of Engineering in Electronics
+      </MDTypography>
+     
+    </MDTypography>
                 </MDAlert>
                 <MDAlert color="error" dismissible>
-                  {alertContent("error")}
+                <MDTypography variant="body2" color="white">
+      A Staff is removed from
+      <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
+        Department of Civil Engineering
+      </MDTypography>
+       Master in Construction Management
+    </MDTypography>
                 </MDAlert>
                 <MDAlert color="warning" dismissible>
-                  {alertContent("warning")}
+                <MDTypography variant="body2" color="white">
+      A New Staff is  added in 
+      <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
+        Department of  Engineering in Information Technology
+      </MDTypography>
+      Software Engineering
+    </MDTypography>
                 </MDAlert>
                 <MDAlert color="info" dismissible>
                   {alertContent("info")}
                 </MDAlert>
                 <MDAlert color="light" dismissible>
-                  {alertContent("light")}
+                <MDTypography variant="body2" color="white">
+      A Staff is Deleted from 
+      <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
+        Department of Civil Engineering
+      </MDTypography>
+      Mechanical Engineering
+    </MDTypography>
                 </MDAlert>
                 <MDAlert color="dark" dismissible>
-                  {alertContent("dark")}
+                <MDTypography variant="body2" color="white">
+      A New HOD is added in 
+      <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
+        Department of Civil Engineering
+      </MDTypography>
+      Mechanical Engineering
+    </MDTypography>
                 </MDAlert>
               </MDBox>
             </Card>
@@ -154,10 +189,10 @@ function Notifications() {
               <MDBox p={2} lineHeight={0}>
                 <MDTypography variant="h5">Notifications</MDTypography>
                 <MDTypography variant="button" color="text" fontWeight="regular">
-                  Notifications on this page use Toasts from Bootstrap. Read more details here.
+                  Updated 10 hrs ago
                 </MDTypography>
               </MDBox>
-              <MDBox p={2}>
+              {/* <MDBox p={2}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={6} lg={3}>
                     <MDButton variant="gradient" color="success" onClick={openSuccessSB} fullWidth>
@@ -184,7 +219,7 @@ function Notifications() {
                     {renderErrorSB}
                   </Grid>
                 </Grid>
-              </MDBox>
+              </MDBox> */}
             </Card>
           </Grid>
         </Grid>

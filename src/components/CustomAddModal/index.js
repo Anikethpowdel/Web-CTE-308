@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import MDButton from 'components/MDButton';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import MDButton from 'components/MDButton';
+import { useState } from 'react';
 
 const AddModal = ({ open, onClose, staffDetails }) => {
   const [focusedInput, setFocusedInput] = useState(null);
@@ -99,7 +99,12 @@ const AddModal = ({ open, onClose, staffDetails }) => {
     setErrorModalOpen(false);
   };
 
-
+  const handleAddClick =() => {
+    setAddModalOpen(true);
+  };
+  const handleAddModalClose = () => {
+    setAddModalOpen(false);
+    }
   
 
 

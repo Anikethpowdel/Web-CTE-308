@@ -25,7 +25,7 @@ function Billing() {
                   <DefaultInfoCard
                     icon="account_balance"
                     title="Department of Civil"
-                    description="Description for Department 1"
+                    description="Building the future, brick by brick: where innovation meets infrastructure"
                     value="D01"
                   />
                 </Link>
@@ -35,7 +35,7 @@ function Billing() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Department of Electrical"
-                      description="Description for Department 2"
+                      description="Powering progress, sparking innovation: where circuits meet creativity."
                       value="D02"
                     />
                   </Link>
@@ -46,7 +46,7 @@ function Billing() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Electronic and Communication"
-                      description="Description for Department 2"
+                      description="Connecting worlds, engineering the future: where signals shape tomorrow."
                       value="D03"
                     />
                   </Link> 
@@ -56,7 +56,7 @@ function Billing() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Department of Information Technology"
-                      description="Description for Department 2"
+                      description="Unleashing innovation, coding the future: where technology transforms possibilities."
                       value="D04"
                     />
                   </Link>
@@ -67,7 +67,7 @@ function Billing() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Department of Architecture"
-                      description="Description for Department 2"
+                      description="Designing dreams, shaping skylines: where creativity meets construction."
                       value="D05"
                     />
                   </Link>
@@ -78,7 +78,7 @@ function Billing() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Department of Science and Humanities"
-                      description="Description for Department 2"
+                      description="Exploring frontiers, shaping perspectives: where curiosity meets humanity."
                       value="D06"
                     />
                   </Link>
