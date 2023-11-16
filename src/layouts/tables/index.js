@@ -25,7 +25,7 @@ function Programme() {
                   <DefaultInfoCard
                     icon="account_balance"
                     title="Bachelor of Engineering in Civil Engineering"
-                    description="Description for programme 1"
+                    description="Crafting resilient infrastructure, shaping skylines, and building a sustainable tomorrow with precision and innovation."
                     value="P01"
                   />
                 </Link>
@@ -35,7 +35,7 @@ function Programme() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Bachelor of Architecture"
-                      description="Description for Department 2"
+                      description="Designing dreams into reality, merging art with function to create inspiring, timeless spaces and structures."
                       value="P02"
                     />
                   </Link>
@@ -46,7 +46,7 @@ function Programme() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Bachelor Of Engineering in Geology"
-                      description="Description for Department 2"
+                      description="Unveiling Earths mysteries, decoding its history, and safeguarding our planet through rock-solid exploration and understanding."
                       value="P03"
                     />
                   </Link> 
@@ -56,7 +56,7 @@ function Programme() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Bachelor Of Engineering in water Resources"
-                      description="Description for Department 2"
+                      description="Unveiling Earths mysteries, decoding its history, and safeguarding our planet through rock-solid exploration and understanding."
                       value="P04"
                     />
                   </Link>
@@ -67,7 +67,7 @@ function Programme() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Bachelor of Electrical Engineering"
-                      description="Description for Department 2"
+                      description="Powering progress, connecting the world, and illuminating the future through ingenious circuits and innovation."
                       value="P05"
                     />
                   </Link>
@@ -78,7 +78,7 @@ function Programme() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Bachelor of Electronics and Communication Engineering"
-                      description="Description for Department 2"
+                      description="Enabling global connectivity, advancing technology, and shaping the future through seamless electronic innovations."
                       value="P06"
                     />
                   </Link>
@@ -89,7 +89,7 @@ function Programme() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Bachelor Of Instrumentation and Control Engineering"
-                      description="Description for Department 2"
+                      description="Precision orchestration of systems, ensuring seamless automation and optimal performance with technological finesse."
                       value="P07"
                     />
                   </Link>
@@ -111,7 +111,7 @@ function Programme() {
                     <DefaultInfoCard
                       icon="account_balance"
                       title="Department of Science and Humanities"
-                      description="Description for Department 2"
+                      description="Transforming data into solutions, bridging innovation and efficiency for a connected, digital world."
                       value="D06"
                     />
                   </Link>

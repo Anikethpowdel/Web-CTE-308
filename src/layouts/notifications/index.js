@@ -47,7 +47,7 @@ function Notifications() {
 
   const alertContent = (name) => (
     <MDTypography variant="body2" color="white">
-      A New Programme is  added in 
+      A New module CTE 404 is  added in 
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
         Department of Civil Engineering
       </MDTypography>
@@ -134,16 +134,16 @@ function Notifications() {
                 </MDAlert>
                 <MDAlert color="success" dismissible>
                 <MDTypography variant="body2" color="white">
-      A New Department is  added 
+      A New Module Test101 is  added 
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
-        Department of AI Engineering
+        Department of Engineering in Electronics
       </MDTypography>
      
     </MDTypography>
                 </MDAlert>
                 <MDAlert color="error" dismissible>
                 <MDTypography variant="body2" color="white">
-      A Programme is removed from
+      A Staff is removed from
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
         Department of Civil Engineering
       </MDTypography>
@@ -152,7 +152,7 @@ function Notifications() {
                 </MDAlert>
                 <MDAlert color="warning" dismissible>
                 <MDTypography variant="body2" color="white">
-      A New Programme is  added in 
+      A New Staff is  added in 
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
         Department of  Engineering in Information Technology
       </MDTypography>
@@ -164,7 +164,7 @@ function Notifications() {
                 </MDAlert>
                 <MDAlert color="light" dismissible>
                 <MDTypography variant="body2" color="white">
-      A New Programme is  added in 
+      A Staff is Deleted from 
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
         Department of Civil Engineering
       </MDTypography>
@@ -173,7 +173,7 @@ function Notifications() {
                 </MDAlert>
                 <MDAlert color="dark" dismissible>
                 <MDTypography variant="body2" color="white">
-      A New Programme is  added in 
+      A New HOD is added in 
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
         Department of Civil Engineering
       </MDTypography>
